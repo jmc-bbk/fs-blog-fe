@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import blogService from '../services/blogs'
 
-const BlogForm = () => {
+const BlogForm = ({handleNotification}) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
@@ -19,6 +19,7 @@ const BlogForm = () => {
       setTitle('')
       setAuthor('')
       setUrl('')
+      handleNotification('Notification, baby!')
     } catch (error) {
       console.log(error)
     }

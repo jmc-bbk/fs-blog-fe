@@ -19,9 +19,10 @@ const BlogForm = ({handleNotification}) => {
       setTitle('')
       setAuthor('')
       setUrl('')
-      handleNotification('Notification, baby!')
+      handleNotification(`Blog ${blog.title} by ${blog.author} has been added!`)
     } catch (error) {
       console.log(error)
+      handleNotification(`Error blog has not been added!`)
     }
   }
 

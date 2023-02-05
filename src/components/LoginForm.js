@@ -6,7 +6,8 @@ const LoginForm = ({
   password,
   handleUser,
   handleUsername,
-  handlePassword
+  handlePassword,
+  handleNotification
 }) => {
 
   const handleLogin = async (event) => {
@@ -19,6 +20,7 @@ const LoginForm = ({
       handleUsername('')
       handlePassword('')
     } catch (error) {
+      handleNotification('Invalid username or password, punk.')
       console.log(error)
     }
   }

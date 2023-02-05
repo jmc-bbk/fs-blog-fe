@@ -4,6 +4,7 @@ import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
 import LogoutButton from './components/LogoutButton'
 import NotificationHeader from './components/NotificationHeader'
+import Togglable from './components/Togglable'
 import blogService from './services/blogs'
 
 // TODO: Naming of handle and set is all messed up, need to come up with standardised convention.
@@ -36,6 +37,24 @@ const App = () => {
     setTimeout(() => {setNotification(null)}, 5000)
   }
 
+  // TODO: Could move to Blog/Like Button
+  // Requires passing blogs into child components
+  const handleLike = async (blog) => {
+    const newBlog = await blogService.like(blog)
+    const oldBlogs = blogs.filter((b) => b.id !== blog.id)
+    setBlogs(oldBlogs.concat(newBlog))
+  }
+
+  const handleDelete = async (blog) => {
+    const confirmText = `Are you sure you want to delete ${blog.title}?`
+
+    if (window.confirm(confirmText)) {
+      await blogService.remove(blog)
+      const newBlogs = blogs.filter((b) => b.id !== blog.id)
+      setBlogs(newBlogs)
+    }
+  }
+
   if (user === null) {
     return (
       <div>
@@ -61,10 +80,21 @@ const App = () => {
         <p>Welcome {user.name}!</p>
         <LogoutButton handleUser={setUser} />
       </span>
-      <h2>create new</h2>
-      <BlogForm handleNotification={handleNotification} />
-      {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
+      <Togglable buttonLabel='new blog'>
+        <BlogForm
+          blogs={blogs}
+          setBlogs={setBlogs}
+          handleNotification={handleNotification} 
+        />
+      </Togglable>
+      {blogs.sort((b1, b2) => b1.likes > b2.likes ? -1 : 1).map(blog =>
+        <Blog
+          key={blog.id}
+          blog={blog}
+          user={user}
+          handleDelete={handleDelete}
+          handleLike={handleLike}
+        />
       )}
     </div>
   )

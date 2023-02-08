@@ -20,7 +20,7 @@ const App = () => {
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs(blogs)
-    )  
+    )
   }, [])
 
   useEffect(() => {
@@ -67,7 +67,7 @@ const App = () => {
           handleUsername={setUsername}
           handlePassword={setPassword}
           handleNotification={handleNotification}
-          />
+        />
       </div>
     )
   }
@@ -84,7 +84,7 @@ const App = () => {
         <BlogForm
           blogs={blogs}
           setBlogs={setBlogs}
-          handleNotification={handleNotification} 
+          handleNotification={handleNotification}
         />
       </Togglable>
       {blogs.sort((b1, b2) => b1.likes > b2.likes ? -1 : 1).map(blog =>

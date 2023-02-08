@@ -13,7 +13,7 @@ const BlogForm = ({blogs, setBlogs, handleNotification}) => {
       const blog = await blogService.create({
         title,
         author,
-        url: url === '' ? null : url 
+        url: url === '' ? null : url
       })
       console.log(blog)
       setTitle('')
@@ -23,7 +23,7 @@ const BlogForm = ({blogs, setBlogs, handleNotification}) => {
       handleNotification(`Blog ${blog.title} by ${blog.author} has been added!`)
     } catch (error) {
       console.log(error)
-      handleNotification(`Error blog has not been added!`)
+      handleNotification('Error blog has not been added!')
     }
   }
 

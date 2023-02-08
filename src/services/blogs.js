@@ -19,7 +19,7 @@ const create = async (blog) => {
     }
   }
   const res = await axios.post(baseUrl, blog, config)
-  
+
   return res.data
 }
 
@@ -41,9 +41,9 @@ const remove = async (blog) => {
 
   const url = `${baseUrl}/${blog.id}`
   const res = await axios.delete(url, config)
-  
+
   return res
 
 }
 
-export default { getAll, create, like, remove, setToken }
+export default {getAll, create, like, remove, setToken}

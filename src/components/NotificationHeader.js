@@ -3,7 +3,7 @@ const NotificationHeader = ({notification}) => {
     return
   }
 
-  return <h2>{notification}</h2>
+  return <h2 className='notification'> {notification}</h2>
 }
 
 export default NotificationHeader
